@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>TrayNBA</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script charset="UTF-8">require('./index')</script> -->
+  </head>
+  <body>
+    <div id="app">
+      <div v-for="m in message">
+        id: {{m.id}} {{m.home.nickname}}  vs  {{m.visitor.nickname}}
+      </div>
+      <input type="text" v-model="id" />
+      <input type="button" @click="submit" value="submit">
+    </div>
+    <script>
+      const {ipcRenderer} = require('electron')
+    
+      ipcRenderer.send('flag-message', '')
+      var app = new Vue({
+        el: '#app',
+        data: {
+          message: [],
+          id: ""
+        },
+        mounted: function () {
+          ipcRenderer.on('play-reply', (event, arg) => {
+            this.message = arg.game
+          })
+        },
+        methods: {
+          submit: function () {
+            ipcRenderer.send('id-message', this.id)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
