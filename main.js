@@ -92,8 +92,8 @@ ipcMain.on('id-message', (event, arg) => {
         var lastEvent = playData[lastIndex].event
         if(lastIndex > last) {
           last = lastEvent
-          trayHome.setTitle(playData[lastIndex].home_score + "   " +playData[lastIndex].description)
-          trayVisitor.setTitle(playData[lastIndex].visitor_score)
+          trayHome.setTitle("H: " + playData[lastIndex].home_score + "   " +playData[lastIndex].description)
+          trayVisitor.setTitle("V: " + playData[lastIndex].visitor_score)
           if (playData[lastIndex].description = "End Period"){
             clearInterval(loop)
           }

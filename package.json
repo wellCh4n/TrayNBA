@@ -11,5 +11,6 @@
   "version": "0.0.1",
   "license": "MIT",
   "description": "tray nba",
-  "author": "wellCh4n"
+  "author": "wellCh4n",
+  "devDependencies": {}
 }
