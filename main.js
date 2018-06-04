@@ -11,6 +11,7 @@ let now = new Date()
 app.dock.hide()
 
 app.on('ready', () => {
+  createVisitorTray()
   createHomeTray()
   createWindow()
 })
@@ -86,17 +87,19 @@ ipcMain.on('id-message', (event, arg) => {
       if (res == null) {
         console.log("比赛未开始")
       } else {
-        createVisitorTray()
         var playData = res.sports_content.game.play
         var lastIndex = playData.length - 1
         var lastEvent = playData[lastIndex].event
-        if(lastIndex > last) {
+        // console.log(last)
+        // console.log(lastEvent)
+        // console.log(playData[lastIndex])
+        if(lastEvent > last) {
           last = lastEvent
           trayHome.setTitle("H: " + playData[lastIndex].home_score + "   " +playData[lastIndex].description)
           trayVisitor.setTitle("V: " + playData[lastIndex].visitor_score)
-          if (playData[lastIndex].description = "End Period"){
-            clearInterval(loop)
-          }
+          // if (playData[lastIndex].description = "End Period"){
+          //   clearInterval(loop)
+          // }
         }
       }
     })
